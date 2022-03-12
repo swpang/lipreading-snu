@@ -21,6 +21,7 @@
 
 
 ## IDL FINAL PROJECT TEAM4
+## Contributors : @ib33x99, @choyoungjung, @KangHyunPark
 
 ### Introduction
 
