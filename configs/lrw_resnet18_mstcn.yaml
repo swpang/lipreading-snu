@@ -1,0 +1,75 @@
+###########
+# Dataset #
+###########
+dataset: lrw
+eval_datasets: [
+    [lrw, val],
+]
+test_datasets: [
+    [lrw, test]
+]
+data_dir: ./data/no_align
+label_path: ./labels/500WordsSortedList.txt
+annotation_dir: ./data/lipread_mp4
+num_classes: 500
+
+modality: video
+epoch: 80
+num_workers: 8
+
+#########
+# Model #
+#########
+model: lipreading
+hidden_dim: 256
+backbone_type: resnet
+relu_type: prelu
+tcn_options: {
+    dropout: 0.2,
+    dwpw: false,
+    kernel_size: [ 3, 5, 7 ],  # list of kernel sizes (1 item for tcn)
+    num_layers: 4,
+    width_mult: 1
+}
+width_mult: 1.0
+extract_feats: False
+
+#########
+# Train #
+#########
+batch_size: 32
+optimizer: adamw
+lr: 0.0003   # 3e-4
+alpha: 0.4   # interpolation strength (uniform=1., ERM=0.)
+
+###########
+# Summary #
+###########
+summary_step: 1000
+ckpt_step: 15000
+
+#########
+# Utils #
+#########
+device: cuda
+seed: 1
+
+############
+# Evaluate #
+############
+eval_step: 15000    # 1 epoch is 15274 steps
+min_eval_step: 10000
+eval_batch_size: 32
+
+########
+# Test #
+########
+test_step: 100000000000000
+min_test_step: 1000000
+test_batch_size: 32
+
+#########
+# Debug #
+#########
+overfit_one_ex:
+debug_eval: False   # every step is evaluated
